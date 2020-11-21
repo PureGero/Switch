@@ -104,7 +104,7 @@ public class Switch extends Minigame implements Listener {
 
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent e) {
-        if (!e.getTo().getChunk().equals(e.getFrom().getChunk()) && (e.getTo().getChunk().getX() % 2) == 1 || (e.getTo().getChunk().getZ() % 2) == 1) {
+        if (!e.getTo().getChunk().equals(e.getFrom().getChunk()) && (e.getTo().getChunk().getX() % 2) != 0 || (e.getTo().getChunk().getZ() % 2) != 0) {
             Game g = MG.core().getGame(e.getPlayer());
             if (g != null && g.minigame == this) {
                 e.setCancelled(true);
