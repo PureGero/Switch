@@ -8,7 +8,6 @@ import net.justminecraft.minigames.minigamecore.worldbuffer.Chunk;
 import net.justminecraft.minigames.minigamecore.worldbuffer.Section;
 import net.justminecraft.minigames.minigamecore.worldbuffer.WorldBuffer;
 import org.bukkit.Bukkit;
-import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
@@ -31,10 +30,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 import java.util.zip.GZIPInputStream;
 
 public class Switch extends Minigame implements Listener {
@@ -91,15 +87,22 @@ public class Switch extends Minigame implements Listener {
         return "Switch";
     }
 
-    private File randomSchem() {
+    private ArrayList<File> randomSchems() {
         File[] d = chunksDir.listFiles();
-        if (d.length < 3)
+        ArrayList<File> schems = new ArrayList<>();
+
+        for (File f : d) {
+            if (f.getName().endsWith(".schematic")) {
+                schems.add(f);
+            }
+        }
+
+        if (schems.size() < 9)
             throw new RuntimeException("Not enough chunk schematic files in " + chunksDir);
-        File f;
-        do {
-            f = d[(int) (Math.random() * d.length)];
-        } while (!f.getName().endsWith(".schematic"));
-        return f;
+
+        Collections.shuffle(schems);
+
+        return schems;
     }
 
     @EventHandler
@@ -321,6 +324,8 @@ public class Switch extends Minigame implements Listener {
         g.disableBlockPlacing = false;
         g.disableHunger = false;
 
+        ArrayList<File> schems = randomSchems();
+
         long t = System.currentTimeMillis();
         for (int x = -10; x < 10; x++)
             for (int z = -10; z < 10; z++)
@@ -331,7 +336,7 @@ public class Switch extends Minigame implements Listener {
         for (int x = -3; x <= 3; x++)
             for (int z = -3; z <= 3; z++) {
                 if (x % 2 == 0 && z % 2 == 0) {
-                    File s = randomSchem();
+                    File s = schems.remove(0);
                     placeChunk(s, w, x, z);
                 } else {
                     for (int i = 0; i < 16; i++)
