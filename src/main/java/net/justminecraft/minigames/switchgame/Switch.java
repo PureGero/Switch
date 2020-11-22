@@ -283,6 +283,7 @@ public class Switch extends Minigame implements Listener {
         SwitchGame g = (SwitchGame) game;
 
         g.world.setDifficulty(Difficulty.HARD);
+        g.world.setSpawnLocation(1000, 0, 1000);
 
         for (int x = -5; x < 5; x++)
             for (int z = -5; z < 5; z++)
