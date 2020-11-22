@@ -8,6 +8,7 @@ import net.justminecraft.minigames.minigamecore.worldbuffer.Chunk;
 import net.justminecraft.minigames.minigamecore.worldbuffer.Section;
 import net.justminecraft.minigames.minigamecore.worldbuffer.WorldBuffer;
 import org.bukkit.Bukkit;
+import org.bukkit.Difficulty;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
@@ -280,6 +281,8 @@ public class Switch extends Minigame implements Listener {
     @Override
     public void startGame(Game game) {
         SwitchGame g = (SwitchGame) game;
+
+        g.world.setDifficulty(Difficulty.HARD);
 
         for (int x = -5; x < 5; x++)
             for (int z = -5; z < 5; z++)
