@@ -303,7 +303,7 @@ public class Switch extends Minigame implements Listener {
             do {
                 highest = g.world.getHighestBlockAt((int) (Math.random() * 16) | (chunk.getX() << 4), (int) (Math.random() * 16) | (chunk.getZ() << 4));
             } while (highest.getType() == Material.LAVA);
-            p.teleport(highest.getLocation().add(0.5, 1, 0.5));
+            p.teleport(highest.getLocation().add(0.5, 0, 0.5));
             MG.resetPlayer(p);
             p.playSound(p.getLocation(), Sound.LEVEL_UP, 2, 1);
             g.minigame.message(p, "Game has started!");

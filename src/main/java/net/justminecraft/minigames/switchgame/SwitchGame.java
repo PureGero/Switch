@@ -42,7 +42,7 @@ public class SwitchGame extends Game {
                     for (Player p : players) {
                         p.teleport(l.get(0));
                         l.remove(0);
-                        p.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 60, 255));
+                        p.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 40, 255));
                         PlayerData.get(p.getUniqueId()).incrementStat(minigame.getMinigameName(), "switches");
                     }
                     broadcastRaw("A switch has occured!");
