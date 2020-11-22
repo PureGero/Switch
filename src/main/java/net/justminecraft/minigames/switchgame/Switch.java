@@ -168,7 +168,7 @@ public class Switch extends Minigame implements Listener {
     }
 
     public ItemStack chestItem() {
-        int i = (int) (Math.random() * 9);
+        int i = (int) (Math.random() * 11);
         switch (i) {
             case 0:
                 if (Math.random() < 0.4) // Halve chance of lava bucket, increase chance of iron ingot
@@ -188,6 +188,10 @@ public class Switch extends Minigame implements Listener {
             case 7:
                 return new ItemStack(Material.RAW_FISH, (int) (Math.random() * 2) + 1);
             case 8:
+                return new ItemStack(Material.SAND, (int) (Math.random() * 2) + 1);
+            case 9:
+                return new ItemStack(Material.SULPHUR, (int) (Math.random() * 2) + 1);
+            case 10:
                 ItemStack s = new ItemStack(Material.LEVER, 1);
                 ItemMeta m = s.getItemMeta();
                 m.setDisplayName("Force a Switch");
@@ -217,7 +221,7 @@ public class Switch extends Minigame implements Listener {
                         Chest c = (Chest) b;
                         do {
                             c.getBlockInventory().setItem((int) (Math.random() * 27), chestItem());
-                        } while (Math.random() < 0.5);
+                        } while (Math.random() < 0.6);
                     }
                     s.chest.put(e.getPlayer().getUniqueId(), s.rands.get(e.getPlayer().getUniqueId()).nextInt(10) + 10);
                 }
